@@ -9,7 +9,7 @@
 import UIKit
 
 class FaceViewController: UIViewController {
-    var expression = FacialExpression(eyes: .Open, eyeBrows: .Normal, mouth: .Grin) {
+    var expression = FacialExpression(eyes: .Open, eyeBrows: .Furrowed, mouth: .Grin) {
         didSet {
             updateUI()
         }
@@ -32,6 +32,25 @@ class FaceViewController: UIViewController {
             faceView.addGestureRecognizer(sadderSwipeGestureRecognizer)
             
             updateUI()
+        }
+    }
+    
+    @IBAction func toggleEyes(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .Ended {
+            switch expression.eyes {
+            case .Open: expression.eyes = .Closed
+            case .Closed: expression.eyes = .Open
+            case .Squinting: break
+            }
+        }
+    }
+    
+    
+    @IBAction func turnEyeBrows(recognizer: UIRotationGestureRecognizer) {
+        if recognizer.rotation > 0 {
+            expression.eyeBrows = expression.eyeBrows.moreRelaxedBrow()
+        } else {
+            expression.eyeBrows = expression.eyeBrows.moreFurrowedBrow()
         }
     }
     

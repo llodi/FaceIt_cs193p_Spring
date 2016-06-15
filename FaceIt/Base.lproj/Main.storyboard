@@ -20,6 +20,7 @@
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="YyN-IF-xrp" customClass="FaceView" customModule="FaceIt" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="scale">
                                         <real key="value" value="0.80000000000000004"/>
@@ -38,6 +39,10 @@
                                         <real key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="8ku-fE-aDq" appends="YES" id="RiP-Mh-Fz2"/>
+                                    <outletCollection property="gestureRecognizers" destination="dkr-km-VQE" appends="YES" id="VaE-Hf-7AT"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -53,6 +58,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="8ku-fE-aDq">
+                    <connections>
+                        <action selector="toggleEyes:" destination="BYZ-38-t0r" id="wB6-Be-a6x"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <rotationGestureRecognizer id="dkr-km-VQE">
+                    <connections>
+                        <action selector="turnEyeBrows:" destination="BYZ-38-t0r" id="Ggy-FO-Qoe"/>
+                    </connections>
+                </rotationGestureRecognizer>
             </objects>
         </scene>
     </scenes>
