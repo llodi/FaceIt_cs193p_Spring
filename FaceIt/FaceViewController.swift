@@ -35,16 +35,48 @@ class FaceViewController: UIViewController {
         }
     }
     
-    @IBAction func toggleEyes(recognizer: UITapGestureRecognizer) {
-        if recognizer.state == .Ended {
-            switch expression.eyes {
-            case .Open: expression.eyes = .Closed
-            case .Closed: expression.eyes = .Open
-            case .Squinting: break
-            }
-        }
+//    @IBAction func toggleEyes(recognizer: UITapGestureRecognizer) {
+//        if recognizer.state == .Ended {
+//            switch expression.eyes {
+//            case .Open: expression.eyes = .Closed
+//            case .Closed: expression.eyes = .Open
+//            case .Squinting: break
+//            }
+//        }
+//    }
+    
+    private struct Animation {
+        static let ShakeAngle = CGFloat(M_PI/6)
+        static let ShakeDuration = 0.5
     }
     
+    @IBAction func headShake(sender: UITapGestureRecognizer) {
+        UIView.animateWithDuration(
+            Animation.ShakeDuration,
+            animations: {
+                self.faceView.transform = CGAffineTransformRotate(self.faceView.transform, Animation.ShakeAngle)
+            },
+            completion: { finished in
+                UIView.animateWithDuration(
+                    Animation.ShakeDuration,
+                    animations: {
+                        self.faceView.transform = CGAffineTransformRotate(self.faceView.transform, -Animation.ShakeAngle*2)
+                    },
+                    completion: { finished in
+                        UIView.animateWithDuration(
+                            Animation.ShakeDuration,
+                            animations: {
+                                self.faceView.transform = CGAffineTransformRotate(self.faceView.transform, Animation.ShakeAngle)
+                            },
+                            completion: { finished in
+                                //
+                            }
+                        )
+                    }
+                )
+            }
+        )
+    }
     
     @IBAction func turnEyeBrows(recognizer: UIRotationGestureRecognizer) {
         if recognizer.rotation > 0 {

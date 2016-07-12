@@ -16,8 +16,8 @@ class BlinkingFaceViewController: FaceViewController {
     }
     
     private struct BlinkRate {
-        static let CloseDuration = 0.1
-        static let OpenDuration = 0.5
+        static let CloseDuration = 0.4
+        static let OpenDuration = 2.5
     }
     
     func startBlinking() {
